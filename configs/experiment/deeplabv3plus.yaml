@@ -1,0 +1,26 @@
+defaults:
+  - override /data: semantic_vehicle_parts
+  - override /model: deeplabv3plus
+  - override /callbacks: default
+  - override /trainer: default
+
+tags: ["deeplabv3plus", "semantic", "car_parts_segmentation"]
+
+seed: 28
+
+trainer:
+  max_epochs: 50
+  gradient_clip_val: null
+  precision: 32
+  accumulate_grad_batches: 4
+
+net:
+  num_classes: 32
+  encoder_name: efficientnet-b7
+
+data:
+  batch_size: 4
+
+logger:
+  mlflow:
+    tags: ${tags}

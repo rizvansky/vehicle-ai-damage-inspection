@@ -1,0 +1,27 @@
+defaults:
+  - override /data: instance_damage_detection
+  - override /model: mask2former_instance
+  - override /callbacks: default
+  - override /trainer: default
+
+tags: ["mask2former", "instance", "damage_detection"]
+
+seed: 28
+
+trainer:
+  max_epochs: 50
+  gradient_clip_val: null
+  precision: 32
+  accumulate_grad_batches: 4
+
+net:
+  num_classes: 19
+  backbone: facebook/mask2former-swin-large-coco-instance
+  pretrained: true
+
+data:
+  batch_size: 4
+
+logger:
+  mlflow:
+    tags: ${tags}

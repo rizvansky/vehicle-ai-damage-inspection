@@ -1,0 +1,22 @@
+_target_: src.models.semantic_module.SemanticSegmentationLitModule
+net:
+  _target_: src.models.components.semantic.mask2former.Mask2FormerSemantic
+  num_classes: 32
+  backbone: facebook/mask2former-swin-tiny-cityscapes-semantic
+  pretrained: true
+  ignore_index: 255
+optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: true
+  lr: 1e-4
+  weight_decay: 0.0
+  eps: 1e-8
+  betas: [0.9, 0.999]
+scheduler:
+  _target_: torch.optim.lr_scheduler.MultiStepLR
+  _partial_: true
+  milestones: [44, 48]
+  gamma: 0.1
+compile: false
+num_classes: 8
+ignore_index: 255
